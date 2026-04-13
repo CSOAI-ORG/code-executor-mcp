@@ -307,6 +307,11 @@ def run_tests(test_command: str = "python -m pytest", working_dir: str = "",
     if err:
         return {"error": err}
 
+    # Safety check on the test command (same as shell commands)
+    safety = _check_command_safety(test_command)
+    if safety:
+        return {"error": safety}
+
     cwd = working_dir if working_dir and os.path.isdir(working_dir) else str(SANDBOX_DIR)
 
     try:
