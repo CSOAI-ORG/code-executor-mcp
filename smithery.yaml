@@ -1,0 +1,10 @@
+name: code-executor-mcp
+description: "MEOK AI Labs — Sandboxed code execution and shell command runner for AI agents. Execute Python,"
+vendor: MEOK AI Labs
+homepage: https://meok.ai
+repository: https://github.com/CSOAI-ORG/code-executor-mcp
+license: MIT
+categories: [Developer Tools, Code Execution]
+tags: [code-execution, sandbox, runtime, code-runner, repl]
+runtime: python
+entrypoint: server.py
