@@ -57,21 +57,36 @@ BLOCKED_COMMANDS = [
     r"sudo\s+rm",
     r">\s*/etc/",
     r"mv\s+/",
+    r"cat\s+/etc/(?:passwd|shadow|sudoers)",  # Read sensitive system files
+    r"curl\s+.*>\s*/tmp/.*&&",                # Download-and-exec pattern
+    r"\benv\b.*(?:pass|secret|key|token)",    # Environment variable leaks
+    r"\bhistory\b",                           # Shell history leak
+    r"base64\s+-d\s*\|",                      # Base64 decode pipe (obfuscation)
 ]
 
 # Blocked Python code patterns
 BLOCKED_PYTHON = [
-    r"os\.system\(",
-    r"subprocess\.(?:call|run|Popen)\(",
+    r"os\s*\.\s*system\s*\(",
+    r"subprocess\.(?:call|run|Popen)\s*\(",
     r"shutil\.rmtree\s*\(\s*['\"]\/",
-    r"__import__\s*\(\s*['\"]os",
+    r"__import__\s*\(",                        # Block ALL __import__ calls
     r"open\s*\(\s*['\"]\/etc",
-    r"eval\s*\(\s*input",
-    r"exec\s*\(\s*input",
-    r"importlib\.import_module\s*\(\s*['\"]os",
+    r"eval\s*\(",                              # Block all eval() calls
+    r"exec\s*\(",                              # Block all exec() calls
+    r"importlib\.import_module\s*\(",
     r"ctypes\.",
-    r"socket\.\w+\(",               # No raw sockets
-    r"__builtins__\.__import__",
+    r"socket\.\w+\s*\(",                       # No raw sockets
+    r"__builtins__",                           # No builtins access
+    r"globals\s*\(\s*\)",                      # No globals() access
+    r"locals\s*\(\s*\)",                       # No locals() access
+    r"getattr\s*\(",                           # No dynamic attribute access
+    r"compile\s*\(",                           # No compile() calls
+    r"from\s+os\s+import",                     # No 'from os import'
+    r"from\s+subprocess\s+import",             # No 'from subprocess import'
+    r"from\s+shutil\s+import",                 # No 'from shutil import'
+    r"import\s+os\b",                          # No 'import os'
+    r"import\s+subprocess\b",                  # No 'import subprocess'
+    r"import\s+shutil\b",                      # No 'import shutil'
 ]
 
 # Blocked JavaScript patterns

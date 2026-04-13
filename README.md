@@ -1,3 +1,5 @@
+> **By [MEOK AI Labs](https://meok.ai)** — Sovereign AI tools for everyone.
+
 # Code Executor MCP Server
 
 Sandboxed code execution for AI agents. Run Python, JavaScript, and shell commands with comprehensive safety guards, output capture, timeout protection, and file access restrictions. Built for production use with blocked destructive patterns and configurable limits.
