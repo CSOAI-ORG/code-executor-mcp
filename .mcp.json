@@ -1,25 +1,122 @@
 {
   "name": "code-executor-mcp",
-  "description": "MEOK AI Labs \u2014 Sandboxed code execution and shell command runner for AI agents. Execute Python,",
-  "vendor": "MEOK AI Labs",
-  "homepage": "https://meok.ai",
-  "repository": "https://github.com/CSOAI-ORG/code-executor-mcp",
-  "runtime": "python",
-  "entrypoint": "server.py",
+  "description": "> **By [MEOK AI Labs](https://meok.ai)** \u2014 Sovereign AI tools for everyone.",
+  "version": "1.0.0",
   "tools": [
-    "execute_code",
-    "run_command",
-    "run_tests",
-    "read_file",
-    "list_sandbox_files",
-    "get_safety_rules"
-  ],
-  "categories": [
-    "Developer Tools",
-    "Code Execution"
-  ],
-  "pricing": {
-    "free": "50 calls/day",
-    "pro": "$9/mo"
-  }
+    {
+      "name": "execute_code",
+      "description": "Execute code in a sandboxed environment with safety checks.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "timeout": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    },
+    {
+      "name": "run_command",
+      "description": "Execute a shell command and return stdout/stderr/exit_code.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string"
+          },
+          "timeout": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "command"
+        ]
+      }
+    },
+    {
+      "name": "run_tests",
+      "description": "Run a test suite and return results. Default: pytest.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "test_command": {
+            "type": "string"
+          },
+          "working_dir": {
+            "type": "string"
+          },
+          "timeout": {
+            "type": "integer"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "read_file",
+      "description": "Read contents of a file (restricted to allowed directories: Desktop,",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "path"
+        ]
+      }
+    },
+    {
+      "name": "list_sandbox_files",
+      "description": "List files in the sandbox working directory. All code execution",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "get_safety_rules",
+      "description": "Get the current safety rules and blocked patterns for code execution.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "execute_code_docker",
+      "description": "Execute code inside a temporary Docker container for isolation.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "timeout_sec": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    }
+  ]
 }

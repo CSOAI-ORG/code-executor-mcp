@@ -260,12 +260,16 @@ mcp = FastMCP(
 
 
 @mcp.tool()
-def execute_code(code: str, language: str = "python", timeout: int = 30) -> dict:
+def execute_code(code: str, language: str = "python", timeout: int = 30, api_key: str = "") -> dict:
     """Execute code in a sandboxed environment with safety checks.
     Supported languages: python, javascript.
     Timeout: max 60 seconds (30 default).
     Dangerous patterns (os.system, subprocess, eval(input), etc.) are blocked.
     Output is captured and returned (stdout + stderr, truncated at 10KB)."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     err = _check_rate_limit()
     if err:
         return {"error": err}
@@ -281,11 +285,15 @@ def execute_code(code: str, language: str = "python", timeout: int = 30) -> dict
 
 
 @mcp.tool()
-def run_command(command: str, timeout: int = 30) -> dict:
+def run_command(command: str, timeout: int = 30, api_key: str = "") -> dict:
     """Execute a shell command and return stdout/stderr/exit_code.
     Timeout: max 60 seconds.
     Destructive commands (rm -rf /, dd, fork bombs, pipe-to-shell) are blocked.
     Commands run in a temporary sandbox directory."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     err = _check_rate_limit()
     if err:
         return {"error": err}
@@ -298,10 +306,14 @@ def run_command(command: str, timeout: int = 30) -> dict:
 
 @mcp.tool()
 def run_tests(test_command: str = "python -m pytest", working_dir: str = "",
-              timeout: int = 60) -> dict:
+              timeout: int = 60, api_key: str = "") -> dict:
     """Run a test suite and return results. Default: pytest.
     Specify working_dir to run tests in a specific project directory.
     Returns stdout, stderr, exit code, and pass/fail summary."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     err = _check_rate_limit()
     if err:
         return {"error": err}
@@ -348,10 +360,14 @@ def run_tests(test_command: str = "python -m pytest", working_dir: str = "",
 
 
 @mcp.tool()
-def read_file(path: str, limit: int = 200) -> dict:
+def read_file(path: str, limit: int = 200, api_key: str = "") -> dict:
     """Read contents of a file (restricted to allowed directories: Desktop,
     Documents, Downloads, /tmp, and the sandbox). Returns file content with
     line limit."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     err = _check_rate_limit()
     if err:
         return {"error": err}
@@ -381,9 +397,13 @@ def read_file(path: str, limit: int = 200) -> dict:
 
 
 @mcp.tool()
-def list_sandbox_files() -> dict:
+def list_sandbox_files(api_key: str = "") -> dict:
     """List files in the sandbox working directory. All code execution
     artifacts are stored here temporarily."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     files = []
     for f in SANDBOX_DIR.iterdir():
         if f.is_file():
@@ -401,9 +421,13 @@ def list_sandbox_files() -> dict:
 
 
 @mcp.tool()
-def get_safety_rules() -> dict:
+def get_safety_rules(api_key: str = "") -> dict:
     """Get the current safety rules and blocked patterns for code execution.
     Useful for understanding what is and isn't allowed."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     return {
         "blocked_shell_patterns": BLOCKED_COMMANDS,
         "blocked_python_patterns": BLOCKED_PYTHON,
@@ -423,7 +447,7 @@ async def execute_code_docker(code: str, language: str = "python", timeout_sec: 
     import subprocess, tempfile, os
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
     
     image_map = {"python": "python:3.11-alpine", "node": "node:20-alpine", "bash": "alpine:latest"}
     image = image_map.get(language.lower(), "alpine:latest")
@@ -446,17 +470,17 @@ async def execute_code_docker(code: str, language: str = "python", timeout_sec: 
             cmd += ["sh", "/code/file"]
         
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout_sec)
-        return json.dumps({
+        return {
             "stdout": result.stdout,
             "stderr": result.stderr,
             "returncode": result.returncode,
             "isolated": True,
             "image": image
-        })
+        }
     except FileNotFoundError:
-        return json.dumps({"error": "Docker not installed or not in PATH", "isolated": False})
+        return {"error": "Docker not installed or not in PATH", "isolated": False}
     except subprocess.TimeoutExpired:
-        return json.dumps({"error": f"Execution timed out after {timeout_sec}s", "isolated": True})
+        return {"error": f"Execution timed out after {timeout_sec}s", "isolated": True}
     finally:
         os.unlink(tmp_path)
 

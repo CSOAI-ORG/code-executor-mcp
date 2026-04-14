@@ -1,10 +1,65 @@
 name: code-executor-mcp
-description: "MEOK AI Labs — Sandboxed code execution and shell command runner for AI agents. Execute Python,"
-vendor: MEOK AI Labs
-homepage: https://meok.ai
-repository: https://github.com/CSOAI-ORG/code-executor-mcp
-license: MIT
-categories: [Developer Tools, Code Execution]
-tags: [code-execution, sandbox, runtime, code-runner, repl]
-runtime: python
-entrypoint: server.py
+description: "> **By [MEOK AI Labs](https://meok.ai)** \u2014 Sovereign AI tools for\
+  \ everyone."
+version: 1.0.0
+tools:
+- name: execute_code
+  description: Execute code in a sandboxed environment with safety checks.
+  parameters:
+  - name: code
+    type: string
+    required: true
+  - name: language
+    type: string
+    required: false
+  - name: timeout
+    type: integer
+    required: false
+- name: run_command
+  description: Execute a shell command and return stdout/stderr/exit_code.
+  parameters:
+  - name: command
+    type: string
+    required: true
+  - name: timeout
+    type: integer
+    required: false
+- name: run_tests
+  description: 'Run a test suite and return results. Default: pytest.'
+  parameters:
+  - name: test_command
+    type: string
+    required: false
+  - name: working_dir
+    type: string
+    required: false
+  - name: timeout
+    type: integer
+    required: false
+- name: read_file
+  description: 'Read contents of a file (restricted to allowed directories: Desktop,'
+  parameters:
+  - name: path
+    type: string
+    required: true
+  - name: limit
+    type: integer
+    required: false
+- name: list_sandbox_files
+  description: List files in the sandbox working directory. All code execution
+  parameters: []
+- name: get_safety_rules
+  description: Get the current safety rules and blocked patterns for code execution.
+  parameters: []
+- name: execute_code_docker
+  description: Execute code inside a temporary Docker container for isolation.
+  parameters:
+  - name: code
+    type: string
+    required: true
+  - name: language
+    type: string
+    required: false
+  - name: timeout_sec
+    type: integer
+    required: false
