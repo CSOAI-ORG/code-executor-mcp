@@ -163,8 +163,7 @@ def _run_python(code: str, timeout: int = 30) -> dict:
             text=True,
             timeout=timeout,
             cwd=str(SANDBOX_DIR),
-            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
-        )
+            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
         elapsed = round(time.time() - start, 3)
 
         return {
@@ -200,8 +199,7 @@ def _run_javascript(code: str, timeout: int = 30) -> dict:
             capture_output=True,
             text=True,
             timeout=timeout,
-            cwd=str(SANDBOX_DIR),
-        )
+            cwd=str(SANDBOX_DIR))
         elapsed = round(time.time() - start, 3)
 
         return {
@@ -235,8 +233,7 @@ def _run_shell(command: str, timeout: int = 30) -> dict:
             capture_output=True,
             text=True,
             timeout=min(timeout, 60),  # Hard cap at 60s
-            cwd=str(SANDBOX_DIR),
-        )
+            cwd=str(SANDBOX_DIR))
         elapsed = round(time.time() - start, 3)
 
         return {
@@ -256,8 +253,7 @@ def _run_shell(command: str, timeout: int = 30) -> dict:
 # ---------------------------------------------------------------------------
 mcp = FastMCP(
     "Code Executor MCP",
-    instructions="Sandboxed code execution: Python, JavaScript, and shell commands with safety guards, output capture, and timeout protection.",
-)
+    instructions="Sandboxed code execution: Python, JavaScript, and shell commands with safety guards, output capture, and timeout protection.")
 
 
 @mcp.tool()
@@ -322,8 +318,7 @@ def run_tests(test_command: str = "python -m pytest", working_dir: str = "",
             capture_output=True,
             text=True,
             timeout=min(timeout, 120),
-            cwd=cwd,
-        )
+            cwd=cwd)
         elapsed = round(time.time() - start, 3)
 
         # Parse pytest output for summary
