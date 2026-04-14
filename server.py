@@ -21,6 +21,9 @@ from pathlib import Path
 from typing import Optional
 from collections import defaultdict
 from mcp.server.fastmcp import FastMCP
+import sys, os
+sys.path.insert(0, os.path.expanduser('~/clawd/meok-labs-engine/shared'))
+from auth_middleware import check_access
 
 # ---------------------------------------------------------------------------
 # Rate limiting
