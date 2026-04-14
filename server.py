@@ -413,5 +413,49 @@ def get_safety_rules() -> dict:
     }
 
 
+
+@mcp.tool(name="execute_code_docker")
+async def execute_code_docker(code: str, language: str = "python", timeout_sec: int = 30, api_key: str = "") -> str:
+    """Execute code inside a temporary Docker container for isolation."""
+    import subprocess, tempfile, os
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return json.dumps({"error": msg, "upgrade_url": "https://meok.ai/pricing"})
+    
+    image_map = {"python": "python:3.11-alpine", "node": "node:20-alpine", "bash": "alpine:latest"}
+    image = image_map.get(language.lower(), "alpine:latest")
+    
+    with tempfile.NamedTemporaryFile(mode='w', suffix=f'.{language}', delete=False) as f:
+        f.write(code)
+        tmp_path = f.name
+    
+    try:
+        cmd = [
+            "docker", "run", "--rm", "-v", f"{tmp_path}:/code/file",
+            "--network", "none", "--memory", "128m", "--cpus", "0.5",
+            image
+        ]
+        if language.lower() == "python":
+            cmd += ["python", "/code/file"]
+        elif language.lower() == "node":
+            cmd += ["node", "/code/file"]
+        else:
+            cmd += ["sh", "/code/file"]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout_sec)
+        return json.dumps({
+            "stdout": result.stdout,
+            "stderr": result.stderr,
+            "returncode": result.returncode,
+            "isolated": True,
+            "image": image
+        })
+    except FileNotFoundError:
+        return json.dumps({"error": "Docker not installed or not in PATH", "isolated": False})
+    except subprocess.TimeoutExpired:
+        return json.dumps({"error": f"Execution timed out after {timeout_sec}s", "isolated": True})
+    finally:
+        os.unlink(tmp_path)
+
 if __name__ == "__main__":
     mcp.run()
