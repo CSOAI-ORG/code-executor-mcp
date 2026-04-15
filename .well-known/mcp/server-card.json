@@ -1,0 +1,64 @@
+{
+  "name": "Code Executor MCP",
+  "description": "Sandboxed code execution: Python, JavaScript, and shell commands with safety guards, output capture, and timeout protection.",
+  "version": "1.0.0",
+  "protocol_version": "2025-11-25",
+  "publisher": {
+    "name": "MEOK AI Labs",
+    "url": "https://meok.ai",
+    "email": "nicholas@meok.ai"
+  },
+  "repository": "https://github.com/CSOAI-ORG/code-executor-mcp",
+  "license": "MIT",
+  "transport": [
+    "stdio",
+    "streamable-http"
+  ],
+  "authentication": {
+    "type": "api-key",
+    "free_tier": true,
+    "free_limit": "15 calls/day"
+  },
+  "tools": [
+    {
+      "name": "execute_code",
+      "description": "Execute code in a sandboxed environment with safety checks."
+    },
+    {
+      "name": "run_command",
+      "description": "Execute a shell command and return stdout/stderr/exit_code."
+    },
+    {
+      "name": "run_tests",
+      "description": "Run a test suite and return results. Default: pytest."
+    },
+    {
+      "name": "read_file",
+      "description": "Read contents of a file (restricted to allowed directories: Desktop,"
+    },
+    {
+      "name": "list_sandbox_files",
+      "description": "List files in the sandbox working directory. All code execution"
+    },
+    {
+      "name": "get_safety_rules",
+      "description": "Get the current safety rules and blocked patterns for code execution."
+    },
+    {
+      "name": "execute_code_docker",
+      "description": "Execute code inside a temporary Docker container for isolation."
+    }
+  ],
+  "categories": [
+    "Developer Tools"
+  ],
+  "pricing": {
+    "free": {
+      "calls_per_day": 15
+    },
+    "pro": {
+      "price": "$29/month",
+      "url": "https://meok.ai/pricing"
+    }
+  }
+}
