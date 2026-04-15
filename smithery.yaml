@@ -1,6 +1,6 @@
 name: code-executor-mcp
-description: 'Sandboxed code execution: Python, JavaScript, and shell commands with
-  safety guards, output capture,'
+description: MCP server for code executor. Features execute code, run command, run
+  tests. From MEOK AI Labs.
 version: 1.0.0
 tools:
 - name: execute_code
