@@ -1,6 +1,6 @@
 {
   "name": "code-executor-mcp",
-  "description": "> **By [MEOK AI Labs](https://meok.ai)** \u2014 Sovereign AI tools for everyone.",
+  "description": "> **By [MEOK AI Labs](https://meok.ai)** \u2014 Sandboxed code execution: Python, JavaScript, and shell commands with safety guards, output capture,",
   "version": "1.0.0",
   "tools": [
     {
