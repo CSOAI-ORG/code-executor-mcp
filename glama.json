@@ -1,0 +1,10 @@
+{
+  "name": "code-executor-mcp",
+  "description": "MEOK AI Labs \u2014 code-executor-mcp",
+  "vendor": "MEOK AI Labs",
+  "homepage": "https://meok.ai",
+  "repository": "https://github.com/CSOAI-ORG/code-executor-mcp",
+  "license": "MIT",
+  "runtime": "python",
+  "entryPoint": "mcp-wrapper.py"
+}
