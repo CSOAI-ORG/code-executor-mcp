@@ -1,60 +1,69 @@
 # Code Executor MCP Server
 
-> **By [MEOK AI Labs](https://meok.ai)** — Sovereign AI tools for everyone.
+> By [MEOK AI Labs](https://meok.ai) — Sandboxed code execution for Python, JavaScript, and shell commands with safety guards
 
-Sandboxed code execution for AI agents. Run Python, JavaScript, and shell commands with safety guards, output capture, timeout protection, and file access restrictions.
-
-[![MCPize](https://img.shields.io/badge/MCPize-Listed-blue)](https://mcpize.com/mcp/code-executor)
-[![MIT License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![MEOK AI Labs](https://img.shields.io/badge/MEOK_AI_Labs-255+_servers-purple)](https://meok.ai)
-
-## Tools
-
-| Tool | Description |
-|------|-------------|
-| `execute_code` | Execute code in a sandboxed environment with safety checks |
-| `run_command` | Execute a shell command and return stdout/stderr/exit_code |
-| `run_tests` | Run a test suite and return results |
-| `read_file` | Read file contents (restricted to allowed directories) |
-| `list_sandbox_files` | List files in the sandbox working directory |
-| `get_safety_rules` | Get current safety rules and blocked patterns |
-
-## Quick Start
+## Installation
 
 ```bash
-pip install mcp
-git clone https://github.com/CSOAI-ORG/code-executor-mcp.git
-cd code-executor-mcp
+pip install code-executor-mcp
+```
+
+## Usage
+
+```bash
 python server.py
 ```
 
-## Claude Desktop Config
+## Tools
 
-```json
-{
-  "mcpServers": {
-    "code-executor": {
-      "command": "python",
-      "args": ["server.py"],
-      "cwd": "/path/to/code-executor-mcp"
-    }
-  }
-}
-```
+### `execute_code`
+Execute code in a sandboxed environment with safety checks. Dangerous patterns (os.system, eval, exec) are blocked.
 
-## Pricing
+**Parameters:**
+- `code` (str): Code to execute
+- `language` (str): Language — 'python' or 'javascript' (default 'python')
+- `timeout` (int): Timeout in seconds (max 60, default 30)
 
-| Plan | Price | Requests |
-|------|-------|----------|
-| Free | $0/mo | 50 executions/day, 30s timeout |
-| Pro | $9/mo | Unlimited, 120s timeout, Docker isolation |
-| Enterprise | Contact us | Custom + network access + GPU execution |
+### `run_command`
+Execute a shell command with safety filters. Destructive commands are blocked.
 
-[Get on MCPize](https://mcpize.com/mcp/code-executor)
+**Parameters:**
+- `command` (str): Shell command
+- `timeout` (int): Timeout in seconds (max 60)
 
-## Part of MEOK AI Labs
+### `run_tests`
+Run a test suite and return results with pass/fail summary.
 
-This is one of 255+ MCP servers by MEOK AI Labs. Browse all at [meok.ai](https://meok.ai) or [GitHub](https://github.com/CSOAI-ORG).
+**Parameters:**
+- `test_command` (str): Test command (default 'python -m pytest')
+- `working_dir` (str): Working directory
+- `timeout` (int): Timeout in seconds (default 60)
 
----
-**MEOK AI Labs** | [meok.ai](https://meok.ai) | nicholas@meok.ai | United Kingdom
+### `read_file`
+Read file contents from allowed directories (Desktop, Documents, Downloads, /tmp, sandbox).
+
+**Parameters:**
+- `path` (str): File path
+- `limit` (int): Max lines to read (default 200)
+
+### `list_sandbox_files`
+List files in the sandbox working directory.
+
+### `get_safety_rules`
+Get current safety rules and blocked patterns.
+
+### `execute_code_docker`
+Execute code inside a temporary Docker container for full isolation.
+
+**Parameters:**
+- `code` (str): Code to execute
+- `language` (str): Language — 'python', 'node', 'bash'
+- `timeout_sec` (int): Timeout in seconds (default 30)
+
+## Authentication
+
+Free tier: 50 calls/day. Upgrade at [meok.ai/pricing](https://meok.ai/pricing) for unlimited access.
+
+## License
+
+MIT — MEOK AI Labs

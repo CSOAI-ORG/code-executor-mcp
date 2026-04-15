@@ -13,6 +13,7 @@ Run:     python server.py
 import json
 import os
 import re
+import shlex
 import subprocess
 import tempfile
 import time
@@ -228,11 +229,14 @@ def _run_shell(command: str, timeout: int = 30) -> dict:
     if safety:
         return {"error": safety}
 
+    cmd_parts = shlex.split(command)
+    if not cmd_parts:
+        return {"error": "No command provided"}
     try:
         start = time.time()
         result = subprocess.run(
-            command,
-            shell=True,
+            cmd_parts,
+            shell=False,
             capture_output=True,
             text=True,
             timeout=min(timeout, 60),  # Hard cap at 60s
@@ -325,11 +329,14 @@ def run_tests(test_command: str = "python -m pytest", working_dir: str = "",
 
     cwd = working_dir if working_dir and os.path.isdir(working_dir) else str(SANDBOX_DIR)
 
+    cmd_parts = shlex.split(test_command)
+    if not cmd_parts:
+        return {"error": "No test command provided"}
     try:
         start = time.time()
         result = subprocess.run(
-            test_command,
-            shell=True,
+            cmd_parts,
+            shell=False,
             capture_output=True,
             text=True,
             timeout=min(timeout, 120),
