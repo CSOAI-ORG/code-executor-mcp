@@ -285,6 +285,13 @@ def execute_code(code: str, language: str = "python", timeout: int = 30, api_key
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        code (str): The code to analyze or process.
+        language (str): The language to analyze or process.
+        timeout (int): The timeout to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -339,6 +346,12 @@ def run_command(command: str, timeout: int = 30, api_key: str = "") -> dict:
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        command (str): The command to analyze or process.
+        timeout (int): The timeout to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -389,6 +402,13 @@ def run_tests(test_command: str = "python -m pytest", working_dir: str = "",
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        test_command (str): The test command to analyze or process.
+        working_dir (str): The working dir to analyze or process.
+        timeout (int): The timeout to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -476,6 +496,12 @@ def read_file(path: str, limit: int = 200, api_key: str = "") -> dict:
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        path (str): The path to analyze or process.
+        limit (int): The limit to analyze or process.
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -542,6 +568,10 @@ def list_sandbox_files(api_key: str = "") -> dict:
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
@@ -596,6 +626,10 @@ def get_safety_rules(api_key: str = "") -> dict:
     When NOT to use:
         Not suitable for real-time production decision-making without
         human review of results.
+
+    Args:
+        api_key (str): The api key to analyze or process.
+
     Behavioral Transparency:
         - Side Effects: This tool is read-only and produces no side effects. It does not modify
           any external state, databases, or files. All output is computed in-memory and returned
