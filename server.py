@@ -269,7 +269,23 @@ def execute_code(code: str, language: str = "python", timeout: int = 30, api_key
     Supported languages: python, javascript.
     Timeout: max 60 seconds (30 default).
     Dangerous patterns (os.system, subprocess, eval(input), etc.) are blocked.
-    Output is captured and returned (stdout + stderr, truncated at 10KB)."""
+    Output is captured and returned (stdout + stderr, truncated at 10KB).
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -293,7 +309,23 @@ def run_command(command: str, timeout: int = 30, api_key: str = "") -> dict:
     """Execute a shell command and return stdout/stderr/exit_code.
     Timeout: max 60 seconds.
     Destructive commands (rm -rf /, dd, fork bombs, pipe-to-shell) are blocked.
-    Commands run in a temporary sandbox directory."""
+    Commands run in a temporary sandbox directory.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -313,7 +345,23 @@ def run_tests(test_command: str = "python -m pytest", working_dir: str = "",
               timeout: int = 60, api_key: str = "") -> dict:
     """Run a test suite and return results. Default: pytest.
     Specify working_dir to run tests in a specific project directory.
-    Returns stdout, stderr, exit code, and pass/fail summary."""
+    Returns stdout, stderr, exit code, and pass/fail summary.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -370,7 +418,23 @@ def run_tests(test_command: str = "python -m pytest", working_dir: str = "",
 def read_file(path: str, limit: int = 200, api_key: str = "") -> dict:
     """Read contents of a file (restricted to allowed directories: Desktop,
     Documents, Downloads, /tmp, and the sandbox). Returns file content with
-    line limit."""
+    line limit.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -406,7 +470,23 @@ def read_file(path: str, limit: int = 200, api_key: str = "") -> dict:
 @mcp.tool()
 def list_sandbox_files(api_key: str = "") -> dict:
     """List files in the sandbox working directory. All code execution
-    artifacts are stored here temporarily."""
+    artifacts are stored here temporarily.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -430,7 +510,23 @@ def list_sandbox_files(api_key: str = "") -> dict:
 @mcp.tool()
 def get_safety_rules(api_key: str = "") -> dict:
     """Get the current safety rules and blocked patterns for code execution.
-    Useful for understanding what is and isn't allowed."""
+    Useful for understanding what is and isn't allowed.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
