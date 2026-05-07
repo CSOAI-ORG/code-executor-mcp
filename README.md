@@ -1,3 +1,5 @@
+[![code-executor-mcp MCP server](https://glama.ai/mcp/servers/CSOAI-ORG/code-executor-mcp/badges/card.svg)](https://glama.ai/mcp/servers/CSOAI-ORG/code-executor-mcp)
+
 <div align="center">
 
 [![GitHub stars](https://img.shields.io/github/stars/CSOAI-ORG/code-executor-mcp)](https://github.com/CSOAI-ORG/code-executor-mcp/stargazers)
