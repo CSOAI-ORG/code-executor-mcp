@@ -23,7 +23,6 @@ from typing import Optional
 from collections import defaultdict
 from mcp.server.fastmcp import FastMCP
 import sys, os
-sys.path.insert(0, os.path.expanduser('~/clawd/meok-labs-engine/shared'))
 from auth_middleware import check_access
 
 # ---------------------------------------------------------------------------
@@ -309,7 +308,7 @@ def execute_code(code: str, language: str = "python", timeout: int = 30, api_key
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
 
     err = _check_rate_limit()
     if err:
@@ -369,7 +368,7 @@ def run_command(command: str, timeout: int = 30, api_key: str = "") -> dict:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
 
     err = _check_rate_limit()
     if err:
@@ -426,7 +425,7 @@ def run_tests(test_command: str = "python -m pytest", working_dir: str = "",
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
 
     err = _check_rate_limit()
     if err:
@@ -519,7 +518,7 @@ def read_file(path: str, limit: int = 200, api_key: str = "") -> dict:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
 
     err = _check_rate_limit()
     if err:
@@ -589,7 +588,7 @@ def list_sandbox_files(api_key: str = "") -> dict:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
 
     files = []
     for f in SANDBOX_DIR.iterdir():
@@ -647,7 +646,7 @@ def get_safety_rules(api_key: str = "") -> dict:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
 
     return {
         "blocked_shell_patterns": BLOCKED_COMMANDS,
@@ -666,9 +665,18 @@ def get_safety_rules(api_key: str = "") -> dict:
 async def execute_code_docker(code: str, language: str = "python", timeout_sec: int = 30, api_key: str = "") -> str:
     """Execute code inside a temporary Docker container for isolation."""
     import subprocess, tempfile, os
+
+STRIPE_199 = "https://buy.stripe.com/00wfZjcgAeUW4c5cyQ8k90K"
+
+def _add_upgrade_tail(response, tier="free"):
+    """Append upgrade nudge to free-tier success responses."""
+    if isinstance(response, dict) and tier == "free":
+        response["_upgrade_note"] = "Pro tier: unlimited calls + priority support. Upgrade: " + STRIPE_199
+    return response
+
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
     
     image_map = {"python": "python:3.11-alpine", "node": "node:20-alpine", "bash": "alpine:latest"}
     image = image_map.get(language.lower(), "alpine:latest")
@@ -705,5 +713,8 @@ async def execute_code_docker(code: str, language: str = "python", timeout_sec: 
     finally:
         os.unlink(tmp_path)
 
-if __name__ == "__main__":
+def main():
     mcp.run()
+
+if __name__ == '__main__':
+    main()
