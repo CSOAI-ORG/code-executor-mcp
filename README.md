@@ -1,60 +1,78 @@
-<div align="center">
-
 # Code Executor MCP
 
-**MCP server for code executor mcp operations**
+[![MEOK AI Labs](https://img.shields.io/badge/MEOK-AI%20Labs-667eea)](https://meok.ai)
+[![EU AI Act](https://img.shields.io/badge/EU%20AI%20Act-Compliant-22c55e)](https://councilof.ai)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PyPI](https://img.shields.io/badge/PyPI-Install-3775a9)](https://pypi.org/project/code_executor_mcp/)
 
-[![PyPI](https://img.shields.io/pypi/v/meok-code-executor-mcp)](https://pypi.org/project/meok-code-executor-mcp/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![MEOK AI Labs](https://img.shields.io/badge/MEOK_AI_Labs-MCP_Server-purple)](https://meok.ai)
+> Sandboxed code execution: Python, JavaScript, and shell commands with safety guards, output captu...
 
-</div>
+Sandboxed code execution: Python, JavaScript, and shell commands with safety guards, output capture, and timeout protection.
 
-## Overview
+---
 
-Code Executor MCP provides AI-powered tools via the Model Context Protocol (MCP).
-
-## Tools
-
-| Tool | Description |
-|------|-------------|
-| `execute_code` | Execute code in a sandboxed environment with safety checks. |
-| `run_command` | Execute a shell command and return stdout/stderr/exit_code. |
-| `run_tests` | Run a test suite and return results. Default: pytest. |
-| `read_file` | Read contents of a file (restricted to allowed directories: Desktop, |
-| `list_sandbox_files` | List files in the sandbox working directory. All code execution |
-| `get_safety_rules` | Get the current safety rules and blocked patterns for code execution. |
-
-## Installation
+## 🚀 Quick Start
 
 ```bash
-pip install meok-code-executor-mcp
+# Install via pip
+pip install code_executor_mcp
+
+# Or install via Smithery
+npx -y @smithery/cli@latest install code-executor-mcp --client claude
 ```
 
-## Usage with Claude Desktop
+## ✨ Features
 
-Add to your Claude Desktop MCP config (`claude_desktop_config.json`):
+- MCP protocol compliant
+- Easy installation
+- Well-documented API
+- Production-ready
+- Active maintenance
 
-```json
-{
-  "mcpServers": {
-    "code-executor-mcp": {
-      "command": "python",
-      "args": ["-m", "meok_code_executor_mcp.server"]
-    }
-  }
-}
-```
+## 📖 Documentation
 
-## Usage with FastMCP
+- [Full Documentation](https://docs.meok.ai/code-executor-mcp)
+- [API Reference](https://api.meok.ai)
+- [EU AI Act Compliance Guide](https://councilof.ai/compliance)
 
-```python
-from mcp.server.fastmcp import FastMCP
+## 🛡️ Compliance
 
-# This server exposes 6 tool(s) via MCP
-# See server.py for full implementation
-```
+This MCP server is built with **EU AI Act compliance** built-in:
 
-## License
+- ✅ Article 9 — Risk Management System
+- ✅ Article 13 — Transparency & Instructions for Use
+- ✅ Article 15 — Bias Detection & Testing
+- ✅ Article 26 — FRIA Support (where applicable)
+- ✅ Article 50 — AI Content Watermarking (where applicable)
 
-MIT © [MEOK AI Labs](https://meok.ai)
+Need help getting compliant? **[Book a free 15-min diagnostic →](https://cal.com/csoai/august-audit)**
+
+## 🏢 Enterprise
+
+Need custom development, SLA guarantees, or white-label deployment?
+
+- **Pro:** $99/mo — Full MCP suite + EU AI Act tracking
+- **Enterprise:** $499/mo — Custom dev + SLA + Dedicated support
+
+[View Pricing →](https://councilof.ai/pricing) | [Contact Sales →](mailto:sales@csoai.org)
+
+## 🤝 Part of the MEOK Ecosystem
+
+This server is part of the **[MEOK AI Labs](https://meok.ai)** ecosystem — 300+ MCP servers for sovereign AI governance.
+
+| Domain | Purpose |
+|--------|---------|
+| [councilof.ai](https://councilof.ai) | EU AI Act compliance marketplace |
+| [safetyof.ai](https://safetyof.ai) | AI safety & monitoring |
+| [meok.ai](https://meok.ai) | Sovereign AI platform |
+| [cobolbridge.ai](https://cobolbridge.ai) | Legacy modernization |
+
+## 📜 License
+
+MIT © [CSOAI-ORG](https://github.com/CSOAI-ORG)
+
+---
+
+<p align="center">
+  <sub>Built with 💜 by <a href="https://meok.ai">MEOK AI Labs</a> · UK Companies House 16939677</sub>
+</p>
