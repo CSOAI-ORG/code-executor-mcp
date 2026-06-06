@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """
+Buy Pro: https://www.csoai.org/checkout
+
 Code Executor MCP Server
 =========================
 Sandboxed code execution and shell command runner for AI agents. Execute Python,

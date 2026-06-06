@@ -1,6 +1,6 @@
 {
   "name": "code-executor-mcp",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "MCP server for code executor. Features execute code, run command, run tests. From MEOK AI Labs.",
   "main": "server.py",
   "mcp": {
