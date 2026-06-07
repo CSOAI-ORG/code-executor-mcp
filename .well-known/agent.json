@@ -1,0 +1,86 @@
+{
+  "name": "code-executor-mcp",
+  "description": "Code Executor MCP Server by MEOK AI Labs",
+  "url": "https://proofof.ai/scorecard/code-executor-mcp.html",
+  "version": "1.0.7",
+  "protocolVersion": "0.2.0",
+  "provider": {
+    "organization": "MEOK AI Labs",
+    "url": "https://meok.ai"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text"
+  ],
+  "defaultOutputModes": [
+    "text"
+  ],
+  "skills": [
+    {
+      "id": "execute_code",
+      "name": "Execute Code",
+      "description": "execute_code via code-executor-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "run_command",
+      "name": "Run Command",
+      "description": "run_command via code-executor-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "run_tests",
+      "name": "Run Tests",
+      "description": "run_tests via code-executor-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "read_file",
+      "name": "Read File",
+      "description": "read_file via code-executor-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "list_sandbox_files",
+      "name": "List Sandbox Files",
+      "description": "list_sandbox_files via code-executor-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "get_safety_rules",
+      "name": "Get Safety Rules",
+      "description": "get_safety_rules via code-executor-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "execute_code_docker",
+      "name": "Execute Code Docker",
+      "description": "execute_code_docker via code-executor-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    }
+  ]
+}

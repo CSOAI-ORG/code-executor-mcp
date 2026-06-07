@@ -1,0 +1,25 @@
+{
+  "acpVersion": "0.1",
+  "agent": {
+    "name": "code-executor-mcp",
+    "description": "Code Executor MCP Server by MEOK AI Labs",
+    "version": "1.0.7",
+    "provider": "MEOK AI Labs",
+    "interfaces": [
+      {
+        "type": "mcp",
+        "transport": "stdio",
+        "package": "code-executor-mcp"
+      }
+    ],
+    "capabilities": [
+      "execute_code",
+      "run_command",
+      "run_tests",
+      "read_file",
+      "list_sandbox_files",
+      "get_safety_rules",
+      "execute_code_docker"
+    ]
+  }
+}
