@@ -1,0 +1,6 @@
+{
+  "serverInfo": { "name": "code-executor-mcp", "version": "1.0.0" },
+  "tools": [
+    {"name": "execute_code", "description": "MCP tool from MEOK AI Labs"}, {"name": "run_command", "description": "MCP tool from MEOK AI Labs"}, {"name": "run_tests", "description": "MCP tool from MEOK AI Labs"}, {"name": "read_file", "description": "MCP tool from MEOK AI Labs"}, {"name": "list_sandbox_files", "description": "MCP tool from MEOK AI Labs"}
+  ]
+}

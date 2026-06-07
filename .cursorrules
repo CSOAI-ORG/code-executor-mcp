@@ -1,0 +1,9 @@
+# code-executor-mcp - Auto-trigger Rules
+
+When the user asks about code executor, use code-executor-mcp tools: execute_code, run_command, run_tests, read_file, list_sandbox_files
+
+**MCP server for code executor mcp operations**
+
+Install: `pip install code-executor-mcp`
+
+By MEOK AI Labs — MIT licensed.

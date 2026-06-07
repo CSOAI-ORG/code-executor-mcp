@@ -1,34 +1,42 @@
-# Code Executor MCP
-
-> Sandboxed code execution: Python, JavaScript, and shell commands with safety guards, output captu...
-
-`code-executor-mcp` is a Model Context Protocol (MCP) server by MEOK AI Labs.
+# code-executor-mcp
+# **MCP server for code executor mcp operations**
 
 ## Install
-
 ```bash
 pip install code-executor-mcp
 ```
 
-Or run without installing:
-
-```bash
-uvx code-executor-mcp
-```
+## Auth & Rate Limits
+- Free tier: 10 calls/day. No API key required.
+- Pro tier (£79/mo): unlimited + signed attestations.
+- Enterprise (£1,499/mo): white-label.
 
 ## Tools
 
-- `execute_code` — Execute code in a sandboxed environment with safety checks.
-- `run_command` — Execute a shell command and return stdout/stderr/exit_code.
-- `run_tests` — Run a test suite and return results. Default: pytest.
-- `read_file` — Read contents of a file (restricted to allowed directories: Desktop,
-- `list_sandbox_files` — List files in the sandbox working directory. All code execution
-- `get_safety_rules` — Get the current safety rules and blocked patterns for code execution.
-- `execute_code_docker` — Execute code inside a temporary Docker container for isolation.
+### `execute_code`
+Execute code in a sandboxed environment with safety checks.
 
-## Links
+### `run_command`
+Execute a shell command and return stdout/stderr/exit_code.
 
-- Source: https://github.com/CSOAI-ORG/code-executor-mcp
-- PyPI: https://pypi.org/project/code-executor-mcp/
-- MEOK AI Labs: https://meok.ai
-- Council of AI: https://councilof.ai
+### `run_tests`
+Run a test suite and return results. Default: pytest.
+
+### `read_file`
+Read contents of a file (restricted to allowed directories: Desktop,
+
+### `list_sandbox_files`
+List files in the sandbox working directory. All code execution
+
+### `get_safety_rules`
+Get the current safety rules and blocked patterns for code execution.
+
+### `execute_code_docker`
+Execute code inside a temporary Docker container for isolation.
+
+
+## Maintainer
+MEOK AI Labs · hello@meok.ai · https://meok.ai · MIT licensed
+
+## Pairs with
+Governance moat: pair this tool with any of MEOK's 38 governance MCPs (EU AI Act, DORA, NIS2, CRA, GDPR, ISO 42001, etc.) for full compliance coverage.
