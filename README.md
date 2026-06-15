@@ -1,4 +1,4 @@
-<!-- mcp-name: CSOAI-ORG/code-executor-mcp -->
+<!-- mcp-name: io.github.CSOAI-ORG/code-executor-mcp -->
 [![MCP Scorecard: 74/100](https://img.shields.io/badge/proofof.ai-74%2F100-5b21b6)](https://proofof.ai/scorecard/code-executor-mcp.html)
 
 # Code Executor MCP
@@ -126,3 +126,32 @@ Free tier: 10 calls/day per MCP. Pro tier (£79/mo): unlimited + cryptographical
 
 <!-- BUY-LADDER:END -->
 
+## See also
+
+MEOK compliance MCP fleet:
+[`code-reviewer-ai-mcp`](https://github.com/CSOAI-ORG/code-reviewer-ai-mcp)
+
+
+## Configuration
+
+Add to your `claude_desktop_config.json` (Claude Desktop) or your MCP client config:
+
+```json
+{
+  "mcpServers": {
+    "code-executor-mcp": {
+      "command": "uvx",
+      "args": ["code-executor-mcp"]
+    }
+  }
+}
+```
+
+Or: `pip install code-executor-mcp` then run the `code-executor-mcp` command (stdio transport).
+
+## Examples
+
+Once configured, ask your assistant, for example:
+- "Use `execute_code` to …"
+- "Use `run_command` to …"
+- "Use `run_tests` to …"
